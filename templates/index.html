@@ -7,8 +7,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Hello World!</h1>
-    <canvas id="myCanvas"></canvas>
+    <div class="container">
+        <h2>Let's Draw and Click Predict</h2>
+        {% if canvasdata %}
+            <p>{{canvasdata}}</p>
+        {% endif %}
+
+        <form action="/" method="POST" onsubmit="canvastoimage()">
+            <input type="hidden" id="canvasimg" name="canvasimg">
+            <input type="hidden" id="canvasdata" name="canvasdata" value="{{ canvasdata }}">
+            <canvas id="myCanvas" width="280" height="280"></canvas>
+        
+            <div class="tools">
+                <button id="predict" type="submit">Predict</button>
+            </div>
+        </form>
+        <div class="tools">
+            <a href="{{ url_for('drawing')}}"><button type="reset" id="clear">Clear</button></a>
+        </div>
+    </div>
     <script type=text/javascript src="{{url_for('static', filename='main.js') }}"></script>
 </body>
 </html>
